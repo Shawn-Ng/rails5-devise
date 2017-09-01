@@ -1,0 +1,28 @@
+<p>
+  <strong>Name:</strong>
+  <%= @note.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @note.description %>
+</p>
+<br>
+
+<h4>Users</h4>
+<% @note.users.each do |user| %>
+  <div><%= user.email %></div>
+<% end %>
+<br>
+
+<h4>Invite User</h4>
+<%= form_for [@note, NoteUser.new] do |f| %>
+  <div class="form-group">
+    <%= f.text_field :email, required: true, :class => "form-control" %>
+  </div>
+  <%= f.submit "Invite", :class => "btn btn-primary" %>
+<%  end %>
+<br>
+
+<%= link_to 'Edit', edit_note_path(@note) %> |
+<%= link_to 'Back', notes_path %>
